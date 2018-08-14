@@ -1,5 +1,6 @@
 package test.java.com.testautotog.container.test;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import test.java.com.testautotog.container.test.page.Dashboard.FormPage;
@@ -24,6 +25,7 @@ public class BaseFunctionalTest extends BaseTestForHub {
     @Test(priority = 0)
     public void SendForm(){
         formPage.goTo();
+        formPage.inputPositiveData();
     }
 
 }

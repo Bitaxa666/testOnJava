@@ -1,5 +1,6 @@
 package test.java.com.testautotog.container.test.page.Dashboard;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -61,13 +62,18 @@ public class FormPage extends PageObject {
         System.out.println("Browser launched and navigated to TestForm page");
     }
 
-    public void inputPositiveData(String userEmail, String birthdayDate, String name) {
+    public void inputPositiveData() {
 
         try {
-            CustomReporter.log("**User inputs correct data.**");
+            System.out.println("**User inputs correct data.**");
             //Values are entered into the 'Email' field
-            clearAndEnterData(domElements.getInputUserEmailField(), userEmail);
-
+            System.out.println("Step 1.0");
+            wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[type=email]")));
+            driver.findElement(By.cssSelector("input[type=email]")).clear();
+            driver.findElement(By.cssSelector("input[type=email]")).sendKeys();
+            System.out.println("Message: " + "test@test.ua" + " is entered");
+            Thread.sleep(1000); //using for debug
+/*
             //Values are entered into the 'BD' field
             onlyClickWithoutClean(domElements.getInputBirthdayDateField(), birthdayDate);
 
@@ -76,7 +82,7 @@ public class FormPage extends PageObject {
 
             //Open dropdown menu
             clickOnWebelementFunctionality(domElements.getClickGenderdropmenu());
-            Thread.sleep(1000); //using for debug
+
 
             //Select user's gender
             clickOnWebelementFunctionality(domElements.getSelectGenderdropmenu().get(5));
@@ -92,7 +98,7 @@ public class FormPage extends PageObject {
             softAssert.assertAll();
 
             CustomReporter.logAction("User successfully sends info");
-
+*/
         } catch (UnsupportedOperationException ue) {
             ue.printStackTrace();
             System.out.println("User has some problems");
