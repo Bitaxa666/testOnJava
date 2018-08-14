@@ -53,9 +53,14 @@ public class FormPage extends PageObject {
     }
 
     /**
-    *Method -  User inputs some informations - positive test.
+    *Method -  Go to the Home page.
     *
     * */
+    public void goTo() {
+        this.driver.get("https://docs.google.com/forms/d/e/1FAIpQLSdqT5F9_qhPDmJ4lfIH7buVkUvjf4LS9ODdqD7PYfVbfFTnpA/viewform");
+        System.out.println("Browser launched and navigated to TestForm page");
+    }
+
     public void inputPositiveData(String userEmail, String birthdayDate, String name) {
 
         try {

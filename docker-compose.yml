@@ -13,11 +13,11 @@ services:
       - HUB_PORT_4444_TCP_ADDR=selenium-hub
       - HUB_PORT_4444_TCP_PORT=4444
   base-module:
-      image: 2vinsdocker/containertest:demo
-      container_name: base-func
-      depends_on:
-        - chrome
-      environment:
-        - MODULE=base-functionality.xml
-        - BROWSER=chrome
-        - SELENIUM_HUB=selenium-hub
+    image: 2mihayluk/containertest:demo
+    container_name: base-function
+    depends_on:
+      - chrome
+    environment:
+      - MODULE=base-functionality.xml
+      - BROWSER=chrome
+      - SELENIUM_HUB=selenium-hub

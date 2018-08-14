@@ -19,13 +19,12 @@ public class BaseTestForHub {
 
         DesiredCapabilities dc = DesiredCapabilities.chrome();
 
-        //String host = System.getProperty("seleniumHubHost");
-        //driver = new RemoteWebDriver(new URL("http://" + host + ":4444/wd/hub"), dc);
+        if (System.getProperty("browser").equals("firefox"))
+            dc = DesiredCapabilities.firefox();
 
-        driver = new RemoteWebDriver(new URL("http://172.20.0.3:5555/wd/hub"), dc);
+        String host = System.getProperty("seleniumHubHost");
 
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+        driver = new RemoteWebDriver(new URL("http://" + host + ":4444/wd/hub"), dc);
     }
 
     /**

@@ -1,6 +1,5 @@
 package test.java.com.testautotog.container.test;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import test.java.com.testautotog.container.test.page.Dashboard.FormPage;
@@ -11,27 +10,20 @@ import java.net.MalformedURLException;
 /**
  * Created by user on 8/10/18.
  */
-public class BaseFunctionalTest extends BaseTestLocaly {
+public class BaseFunctionalTest extends BaseTestForHub {
 
     private FormPage formPage;
-    private Dotenv dotenv;
 
+    @BeforeTest
+    public void setUp() throws MalformedURLException {
+        super.setUp();
+        formPage = new FormPage(driver);
+    }
 
     //Positive test
     @Test(priority = 0)
     public void SendForm(){
-        formPage = new FormPage(driver);
-        dotenv = Dotenv.configure()
-                .directory("./ENV/")
-                .ignoreIfMalformed()
-                .ignoreIfMissing()
-                .load();
-        driver.get(dotenv.get("WEB_ADDRESS"));
-        CustomReporter.logAction("Browser launched and navigated to the Login page");
-
-        formPage.inputPositiveData(dotenv.get("USER_EMAIL"), dotenv.get("USER_BDATE"), dotenv.get("USER_NAME"));
-
-
+        formPage.goTo();
     }
 
 }

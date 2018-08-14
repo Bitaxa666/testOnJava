@@ -2,10 +2,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="base-functionality" parallel="none" allow-return-values="true" verbose="1" >
     <test name="basic function for generate report">
-        <parameter name="browsDefault"  value="chrome"/>
         <classes>
             <class name="test.java.com.testautotog.container.test.BaseFunctionalTest"/>
         </classes>
     </test>
-
 </suite>
