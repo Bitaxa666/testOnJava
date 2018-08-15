@@ -1,16 +1,12 @@
 package test.java.com.testautotog.container.test.page.Dashboard;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
 import test.java.com.testautotog.container.test.page.PageObject;
-import test.java.com.testautotog.container.test.utils.logging.CustomReporter;
-
 
 /**
  * Created by user on 7/17/18.
@@ -33,8 +29,8 @@ public class FormPage extends PageObject {
         this.softAssert = new SoftAssert();
         this.domElements = new FormPageDomElements(driver);
     }
-
-    private void clearAndEnterData (WebElement element, String inputText) {
+//TODO del this methods
+/*    private void clearAndEnterData (WebElement element, String inputText) {
         FormPage.wait.until(ExpectedConditions.visibilityOf(element));
         element.clear();
         element.sendKeys(inputText);
@@ -52,7 +48,7 @@ public class FormPage extends PageObject {
         element.sendKeys(inputText);
         CustomReporter.log("Message: " + inputText + " is entered");
     }
-
+*/
     /**
     *Method -  Go to the Home page.
     *
@@ -67,38 +63,14 @@ public class FormPage extends PageObject {
         try {
             System.out.println("**User inputs correct data.**");
             //Values are entered into the 'Email' field
+            //TODO now the first step is working - only for docker
             System.out.println("Step 1.0");
             wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[type=email]")));
             driver.findElement(By.cssSelector("input[type=email]")).clear();
             driver.findElement(By.cssSelector("input[type=email]")).sendKeys();
             System.out.println("Message: " + "test@test.ua" + " is entered");
             Thread.sleep(1000); //using for debug
-/*
-            //Values are entered into the 'BD' field
-            onlyClickWithoutClean(domElements.getInputBirthdayDateField(), birthdayDate);
 
-            //Values are entered into the 'Name' field
-            clearAndEnterData(domElements.getInputUserNameField(), name);
-
-            //Open dropdown menu
-            clickOnWebelementFunctionality(domElements.getClickGenderdropmenu());
-
-
-            //Select user's gender
-            clickOnWebelementFunctionality(domElements.getSelectGenderdropmenu().get(5));
-
-            //Select answer number 3 OR TODO add random generator for answer
-            clickOnWebelementFunctionality(domElements.getSelectAnswer().get(3));
-
-            //Send info
-            clickOnWebelementFunctionality(domElements.getSubmitButton());
-            Thread.sleep(5000); //using for debug
-
-            softAssert.assertTrue(domElements.getSuccessfulSendMessage().getText().equals("Вашу відповідь було записано."));
-            softAssert.assertAll();
-
-            CustomReporter.logAction("User successfully sends info");
-*/
         } catch (UnsupportedOperationException ue) {
             ue.printStackTrace();
             System.out.println("User has some problems");

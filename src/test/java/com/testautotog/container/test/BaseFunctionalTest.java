@@ -1,10 +1,8 @@
 package test.java.com.testautotog.container.test;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import test.java.com.testautotog.container.test.page.Dashboard.FormPage;
-import test.java.com.testautotog.container.test.utils.logging.CustomReporter;
 
 import java.net.MalformedURLException;
 
