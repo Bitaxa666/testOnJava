@@ -1,6 +1,5 @@
 package test.java.com.testautotog.container.test.page.Dashboard;
 
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -9,89 +8,55 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
 import test.java.com.testautotog.container.test.page.PageObject;
 import test.java.com.testautotog.container.test.utils.logging.CustomReporter;
+import test.java.com.testautotog.container.test.utils.logging.UtilsFunction;
 
 
 /**
- * Created by user on 7/17/18.
+ * Created by Mihayluk V.V on 03/25/19.
  */
 public class FormPage extends PageObject {
 
-    private WebDriver driver;
-    private static WebDriverWait wait;
     private Actions action;
     private SoftAssert softAssert;
+    private UtilsFunction utilsFunction;
 
-    private FormPageDomElements domElements;
+    private LoginFormPageDomElements domElements;
 
 
     public FormPage(WebDriver driver) {
         super(driver);
         this.driver = driver;
-        this.wait = (WebDriverWait) new WebDriverWait(driver, 30).withMessage("Element is not founded");
+        this.utilsFunction = new UtilsFunction(driver);
         this.action = new Actions(driver);
         this.softAssert = new SoftAssert();
-        this.domElements = new FormPageDomElements(driver);
-    }
-
-    private void clearAndEnterData (WebElement element, String inputText) {
-        FormPage.wait.until(ExpectedConditions.visibilityOf(element));
-        element.clear();
-        element.sendKeys(inputText);
-        CustomReporter.log("Message: " + inputText + " is entered");
-    }
-
-    private void  clickOnWebelementFunctionality (WebElement element) {
-        FormPage.wait.until(ExpectedConditions.elementToBeClickable(element));
-        element.click();
-        CustomReporter.log("Message: " + element + " is pressed on.");
-    }
-
-    private void onlyClickWithoutClean(WebElement element, String inputText) {
-        FormPage.wait.until(ExpectedConditions.visibilityOf(element));
-        element.sendKeys(inputText);
-        CustomReporter.log("Message: " + inputText + " is entered");
+        this.domElements = new LoginFormPageDomElements(driver);
     }
 
     /**
-    *Method -  User inputs some informations - positive test.
+    *Method(positive test).  User enter valid data to login/password fields and click on the "LogIn" button
     *
+     * @param userLogin - login
+     * @param userPassword - password
     * */
-    public void inputPositiveData(String userEmail, String birthdayDate, String name) {
+    public void inputPositiveData(String userLogin, String userPassword) {
 
         try {
-            CustomReporter.log("**User inputs correct data.**");
-            //Values are entered into the 'Email' field
-            clearAndEnterData(domElements.getInputUserEmailField(), userEmail);
 
-            //Values are entered into the 'BD' field
-            onlyClickWithoutClean(domElements.getInputBirthdayDateField(), birthdayDate);
+            CustomReporter.log("User enter valid data to login/password fields and click on the submit button.");
+            //Enter the value in the login field.
+            utilsFunction.clearAndEnterData(domElements.getInputUserLoginField(), userLogin);
+            //Enter the value in the password field.
+            utilsFunction.clearAndEnterData(domElements.getInputUserPasswordField(), userPassword);
 
-            //Values are entered into the 'Name' field
-            clearAndEnterData(domElements.getInputUserNameField(), name);
-
-            //Open dropdown menu
-            clickOnWebelementFunctionality(domElements.getClickGenderdropmenu());
-            Thread.sleep(1000); //using for debug
-
-            //Select user's gender
-            clickOnWebelementFunctionality(domElements.getSelectGenderdropmenu().get(5));
-
-            //Select answer number 3 OR TODO add random generator for answer
-            clickOnWebelementFunctionality(domElements.getSelectAnswer().get(3));
-
-            //Send info
-            clickOnWebelementFunctionality(domElements.getSubmitButton());
-            Thread.sleep(5000); //using for debug
-
-            softAssert.assertTrue(domElements.getSuccessfulSendMessage().getText().equals("Вашу відповідь було записано."));
-            softAssert.assertAll();
-
-            CustomReporter.logAction("User successfully sends info");
+            utilsFunction.clickOnWebelement(domElements.getSubmitButton());
+            CustomReporter.logAction("User successfully LogIn");
+            Thread.sleep(5000); //TODO:using for debug
 
         } catch (UnsupportedOperationException ue) {
             ue.printStackTrace();
             System.out.println("User has some problems");
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             e.printStackTrace();
             System.out.println("Threads no sleep.");
         }

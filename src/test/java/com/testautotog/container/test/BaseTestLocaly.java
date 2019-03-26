@@ -4,6 +4,8 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -32,13 +34,33 @@ public abstract class BaseTestLocaly {
 
     private WebDriver getDriver(String browser) {
         switch (browser) {
-
+            case "firefox":
+                System.setProperty(
+                        "webdriver.gecko.driver",
+                        getResource("/geckodriver"));
+                return new FirefoxDriver();
+            case "ie":
+            case "internet explorer":
+                System.setProperty(
+                        "webdriver.ie.driver",
+                        getResource("/IEDriverServer.exe"));
+                return new InternetExplorerDriver();
             case "chrome":
             default:
-                ChromeDriverManager.getInstance().setup();
-                ChromeOptions options1 = new ChromeOptions();
-                options1.addArguments("--headless", "--lang=es", "--enable-precise-memory-info");
-                return new ChromeDriver(options1);
+                String driverPath = System.getProperty("user.dir") + "/src/resources/chromedriver";
+                System.setProperty(
+                       // *//*"webdriver.chrome.driver",
+                        //getResource("/chromedriver"));
+
+                        //use work java directory, not resources directory.....
+                        "webdriver.chrome.driver",
+                        driverPath);
+                return new ChromeDriver();
+//                ChromeDriverManager.getInstance().setup();
+//                ChromeOptions options = new ChromeOptions();
+//                options.addArguments("--headless", "--lang=es", "--enable-precise-memory-info", "--no-sandbox");
+//                return new ChromeDriver(options);
+
         }
     }
     /**
