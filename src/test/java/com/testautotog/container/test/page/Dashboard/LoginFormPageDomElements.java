@@ -17,7 +17,9 @@ import java.util.List;
 @Data @Getter @Setter
 public class LoginFormPageDomElements extends PageObject {
 
-    /*Find elements on the page. https://autotest-prerelease.intesting.ca/login*/
+    /**
+    *Find elements on the page. https://autotest-prerelease.intesting.ca/login
+     */
 
     //Form page - 'login' field
     @CacheLookup
@@ -29,14 +31,25 @@ public class LoginFormPageDomElements extends PageObject {
     @FindBy(css="#password")
     private WebElement inputUserPasswordField;
 
+    //Redirect container
+    @CacheLookup
+    @FindBy(css="#tile-container .tile-page")
+    private WebElement userMainDashboard;
+
     //Submit button
     @CacheLookup
     @FindBy(css="#login-page > .btn_submit")
     private WebElement submitButton;
 
-//    @CacheLookup
-//    @FindBy(css=".freebirdFormviewerViewResponseConfirmationMessage")
-//    private WebElement successfulSendMessage;
+    //password-element error
+    @CacheLookup
+    @FindBy(css="#username-element > .error")
+    private WebElement unsuccessfulNameMessage;
+
+    //login-element error
+    @CacheLookup
+    @FindBy(css="#password-element > .error")
+    private WebElement unsuccessfulPwdMessage;
 
     public LoginFormPageDomElements(WebDriver driver) {
         super(driver);

@@ -13,7 +13,7 @@ public class UtilsFunction {
     private static WebDriverWait wait;
 
     public UtilsFunction(WebDriver driver) {
-        this.wait = (WebDriverWait) new WebDriverWait(driver, 30).withMessage("Сould not find item.");
+        this.wait = (WebDriverWait) new WebDriverWait(driver, 15).withMessage("Сould not find item.");
     }
 
     public void clearAndEnterData (WebElement element, String inputText) {
@@ -27,6 +27,11 @@ public class UtilsFunction {
         this.wait.until(ExpectedConditions.elementToBeClickable(element));
         element.click();
         CustomReporter.log("Message: " + element + " is pressed on.");
+    }
+
+    public void waitWebElement (WebElement element) {
+        this.wait.until(ExpectedConditions.visibilityOf(element));
+        CustomReporter.log("Element is shown: " + element);
     }
 
     public void onlyClickWithoutClean(WebElement element, String inputText) {

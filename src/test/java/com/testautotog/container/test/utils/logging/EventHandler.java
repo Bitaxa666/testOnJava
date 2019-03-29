@@ -97,7 +97,7 @@ public class EventHandler implements WebDriverEventListener {
 
     @Override
     public void afterChangeValueOf(WebElement element, WebDriver driver, CharSequence[] keysToSend) {
-        CustomReporter.log(String.format("Changed element " + element.getTagName()));
+        //CustomReporter.log(String.format("Changed element " + element.getTagName()));
     }
 
     @Override

@@ -49,17 +49,9 @@ public abstract class BaseTestLocaly {
             default:
                 String driverPath = System.getProperty("user.dir") + "/src/resources/chromedriver";
                 System.setProperty(
-                       // *//*"webdriver.chrome.driver",
-                        //getResource("/chromedriver"));
-
-                        //use work java directory, not resources directory.....
                         "webdriver.chrome.driver",
                         driverPath);
                 return new ChromeDriver();
-//                ChromeDriverManager.getInstance().setup();
-//                ChromeOptions options = new ChromeOptions();
-//                options.addArguments("--headless", "--lang=es", "--enable-precise-memory-info", "--no-sandbox");
-//                return new ChromeDriver(options);
 
         }
     }
